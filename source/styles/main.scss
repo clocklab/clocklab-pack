@@ -2,12 +2,13 @@
 @import "compass/utilities/sprites";
 @import "compass/css3";
 
-// components
-@import "components/base";
-@import "components/fonts";
-@import "components/mixins";
-@import "components/sprites";
-@import "components/reset";
+// base
+@import "base/variables";
+@import "base/fonts";
+@import "base/mixins";
+@import "base/sprites";
+@import "base/reset";
+@import "base/common";
 
 // sprites
 $space: 0;
@@ -165,3 +166,6 @@ body {
         }
     }
 }
+
+// components
+@import "components/Header/main"
