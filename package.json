@@ -1,0 +1,30 @@
+{
+    "name": "gontarenko",
+    "description": "modules",
+    "version": "1.0.0",
+    "license": "ISC",
+    "author": {
+        "name": "Igor Gontarenko",
+        "email": "igor.gontarenko@gmail.com",
+        "url": "http://gontarenko.pp.ua"
+    },
+    "dependencies": {
+        "gulp": "^3.9.1",
+        "bower": "^1.8.0",
+        "rimraf": "^2.5.4",
+        "browser-sync": "^2.14.3",
+        "imagemin-pngquant": "^5.0.0",
+        "gulp-main-bower-files": "^1.5.3",
+        "gulp-autoprefixer": "^3.1.1",
+        "gulp-load-plugins": "^1.4.0",
+        "gulp-concat-css": "^2.3.0",
+        "gulp-clean-css": "^2.0.13",
+        "gulp-imagemin": "^3.0.3",
+        "gulp-compass": "^2.1.0",
+        "gulp-plumber": "^1.1.0",
+        "gulp-rename": "^1.2.2",
+        "gulp-rigger": "^0.5.8",
+        "gulp-uglify": "^1.5.4",
+        "gulp-watch": "^4.3.9"
+    }
+}

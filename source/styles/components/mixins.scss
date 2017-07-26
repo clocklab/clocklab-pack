@@ -1,0 +1,58 @@
+// a function to calculate px to em
+@function em($pixels, $context: $browser-context) {
+    @if (unitless($context)) {
+        $context: $context * 1px;
+    }
+    @if (unitless($pixels)) {
+        $pixels: $pixels * 1px;
+    }
+    @return $pixels / $context * 1em;
+}
+
+// a mixin to create retina image
+@mixin image-retina($normal, $retina) {
+    width: image-width($normal);
+    height: image-height($normal);
+    background-image: image-url($normal);
+    @media (min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+        background-size: (image-width($retina) / 2) (image-height($retina) / 2);
+        background-image: image-url($retina);
+    }
+}
+
+// media queries mixin
+@mixin media($media, $orientation: false) {
+    @if $orientation == "landscape" {
+        @if $media == phone {
+            @media only screen and (max-width: #{$phone - 1px}) and (orientation: landscape) { @content; }
+        }
+        @if $media == tablet {
+            @media only screen and (min-width: #{$phone}) and (orientation: landscape) { @content; }
+        }
+        @if $media == laptop {
+            @media only screen and (min-width: #{$tablet}) and (orientation: landscape) { @content; }
+        }
+        @if $media == desktop {
+            @media only screen and (min-width: #{$laptop}) and (orientation: landscape) { @content; }
+        }
+        @if $media == large {
+            @media only screen and (min-width: #{$desktop}) and (orientation: landscape) { @content; }
+        }
+    } @else {
+        @if $media == phone {
+            @media only screen and (max-width: #{$phone - 1px}) { @content; }
+        }
+        @if $media == tablet {
+            @media only screen and (min-width: #{$phone}) { @content; }
+        }
+        @if $media == laptop {
+            @media only screen and (min-width: #{$tablet}) { @content; }
+        }
+        @if $media == desktop {
+            @media only screen and (min-width: #{$laptop}) { @content; }
+        }
+        @if $media == large {
+            @media only screen and (min-width: #{$desktop}) { @content; }
+        }
+    }
+}

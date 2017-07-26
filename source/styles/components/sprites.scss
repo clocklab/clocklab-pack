@@ -1,0 +1,118 @@
+// option variable to define the spacing between images in the generated sprite
+$sprites-2x: 0;
+$sprites: 0;
+$urls-2x: 0;
+$urls: 0;
+$names: 0;
+$space: 0;
+
+// a mixin to add images to create sprites
+@mixin add($name, $folder, $folder-2x) {
+    $sprite: sprite-map($folder, $spacing: $space);
+    $sprite-2x: sprite-map($folder-2x, $spacing: $space * 2);
+
+    @if (feature-exists(global-variable-shadowing)) {
+        $names: append($names, $name) !global;
+        $sprites: append($sprites, $sprite) !global;
+        $urls: append($urls, sprite-url($sprite)) !global;
+        $sprites-2x: append($sprites-2x, $sprite-2x) !global;
+        $urls-2x: append($urls-2x, sprite-url($sprite-2x)) !global;
+    } @else {
+        $names: append($names, $name);
+        $sprites: append($sprites, $sprite);
+        $urls: append($urls, sprite-url($sprite));
+        $sprites-2x: append($sprites-2x, $sprite-2x);
+        $urls-2x: append($urls-2x, sprite-url($sprite-2x));
+    }
+}
+
+// a mixin to create retina sprites with hover & active states
+@mixin sprite($name, $title: 0, $hover: false, $active: false) {
+    $length: length($names);
+    $index: 2;
+
+    @for $i from $index through $length {
+        @if $title == nth($names, $i) {
+            $index: $i;
+        }
+    }
+
+    $url: nth($urls, $index);
+    $sprite: nth($sprites, $index);
+    $url-2x: nth($urls-2x, $index);
+    $sprite-2x: nth($sprites-2x, $index);
+
+    @include -sprite($name, $sprite, $url, $sprite-2x, $url-2x, $hover, $active);
+}
+
+// a function to calculate sprite width
+@function sprite-width($name, $title: 0) {
+    $length: length($names);
+    $index: 2;
+
+    @for $i from $index through $length {
+        @if $title == nth($names, $i) {
+            $index: $i;
+        }
+    }
+
+    $sprite: nth($sprites, $index);
+    @return image-width(sprite-file($sprite, $name));
+}
+
+// a function to calculate sprite heigth
+@function sprite-height($name, $title: 0) {
+    $length: length($names);
+    $index: 2;
+
+    @for $i from $index through $length {
+        @if $title == nth($names, $i) {
+            $index: $i;
+        }
+    }
+
+    $sprite : nth($sprites, $index);
+    @return image-height(sprite-file($sprite, $name));
+}
+
+// a mixin to change sprites
+@mixin retina {
+    @media (min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+        @content;
+    }
+}
+
+@mixin -bg-position($sprite, $name, $padding, $multiplier: 1) {
+    $pos: sprite-position($sprite, $name, -$padding * $multiplier, -$padding * $multiplier);
+    background-position: nth($pos, 1) nth($pos, 2) / $multiplier;
+}
+
+// the general purpose retina sprite mixin
+@mixin -sprite($name, $sprite, $url, $sprite-2x, $url-2x, $hover, $active, $padding: 0) {
+    background-image: $url;
+    @include -bg-position($sprite, $name, $padding);
+    @include sprite-dimensions($sprite, $name);
+
+    @if $hover == "hover" {
+        &:hover { @include -bg-position($sprite, $name + -hover, $padding); }
+    }
+    @if $active == "active" {
+        &:active { @include -bg-position($sprite, $name + -active, $padding); }
+    }
+    @if $padding > 0 {
+        padding: $padding;
+    }
+
+    @include retina {
+        background-image: $url-2x;
+        @include background-size(ceil(image-width(sprite-path($sprite-2x)) / 2) ceil(image-height(sprite-path($sprite-2x)) / 2));
+        @include -bg-position($sprite-2x, $name, $padding, 2);
+
+        @if $hover == true {
+            &:hover { @include -bg-position($sprite-2x, $name + -hover, $padding, 2); }
+        }
+        @if $active == true {
+            &:active { @include -bg-position($sprite-2x, $name + -active, $padding, 2); }
+        }
+    }
+}

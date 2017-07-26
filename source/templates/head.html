@@ -1,0 +1,29 @@
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<link rel="icon" href="images/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="stylesheet" href="styles/main.css">
+
+<!-- some Bower components will be here if you need it -->
+<!-- <link rel="stylesheet" href="styles/libs.min.css"> -->
+
+<!-- script -->
+<!-- <script src="/xhr/wordlist?d[0]=main" defer charset="utf-8"></script> -->
+<script src="scripts/main.min.js"></script>
+<script src="scripts/gbAPI.js"></script>
+<script>
+	
+	// var CURRENT_LANGUAGE = "<?=USER_LANG?>";
+    var Queue = new function() {
+        var q = this;q.s = [];q.stack = {"gbAPI":false, "main":false};
+        q.add = function(h) { q.s.push(h); }
+        var w = setInterval(function() {
+            var r = true;
+            for (var k in q.stack){if(!k){r = false;break; }}
+            if (r) { clearInterval(w);for(var j = q.s.length; j--;) q.s[j]();}
+        }, 1000);
+    }
+
+    // Queue.add(doc.currentScript.parentNode, function() { });
+</script>

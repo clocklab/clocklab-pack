@@ -1,0 +1,167 @@
+// modules
+@import "compass/utilities/sprites";
+@import "compass/css3";
+
+// components
+@import "components/base";
+@import "components/fonts";
+@import "components/mixins";
+@import "components/sprites";
+@import "components/reset";
+
+// sprites
+$space: 0;
+@include add(social, "social/*.png", "social-2x/*.png");
+
+// ***** body *****
+body {
+    font-family: $regular;
+    background-color: $primary;
+    h1, h2, h3, h4, h5, h6, button, input, label, span,
+    td, th, li, p, a, a:hover, a:focus {
+        letter-spacing: em(1);
+        color: $primary;
+    }
+
+    // ----- preloader -----
+    #preloader {
+        background-color: $white;
+        .spinner {
+            @include image-retina("/../images/logo-black.png", "/../images/logo-black-2x.png");
+            top: 45%;
+        }
+    }
+
+    // ***** header *****
+    #header.header {
+
+        // ----- top -----
+        .top {
+            display: flex;
+            padding: 12px 0;
+            background-color: $primary;
+            
+            // ----- logo -----
+            .logo {
+                float: left;
+               .image {
+                    @include image-retina("/../images/logo.png", "/../images/logo-2x.png");
+                    & + span {
+                        font-family: $light;
+                        margin-left: 15px;
+                        color: $white;
+                    }
+                } 
+            }
+            
+            // ----- main menu -----
+            .main-menu {
+                float: right;
+                height: 100%;
+                li {
+                    margin-left: 25px;
+                    &:first-child { margin-left: 0; }
+                    a {
+                        opacity: .75;
+                        color: $white;
+                        font-family: $light;
+                        @include transition($time);
+                        &:hover { opacity: 1; }
+                    }
+                }
+            }
+
+            // ***** phone *****
+            @include media(phone) {
+
+                // ----- main menu ----
+                .main-menu {
+                    width: 100%;
+                    float: none;
+                    display: none;
+                    height: initial;
+                    margin-top: 32px;
+                    text-align: center;
+                    li {
+                        margin-left: 0;
+                        display: block;
+                    }
+                }
+
+                // ----- button -----
+                .button {
+                    float: right;
+                    .open { @include image-retina("/../images/open.png", "/../images/open-2x.png"); }
+                    .close {
+                        @include image-retina("/../images/close.png", "/../images/close-2x.png");
+                        display: none;
+                    }
+                }
+            }
+        }
+        
+        // ----- bottom -----
+        .bottom {
+            float: left;
+            width: 100%;
+            font-size: em(25);
+            text-align: center;
+            text-transform: uppercase;
+            background-color: $secondary;
+            padding: $padding;
+        }
+    }
+
+    // ***** main menu *****
+    #main-menu.main-menu {
+        @include media(phone) { display: none; }
+        border-top: 1px solid $border;
+        background-color: $white;
+        text-align: center;
+        padding: $padding;
+        li {
+            margin-left: 25px;
+            &:first-of-type { margin-left: 0; }
+            a {
+                @include transition($time);
+                border-bottom: 1px solid transparent;
+                &:hover { border-bottom: 1px solid; }
+            }
+        }
+    }
+
+    // ***** article *****
+    #article.article {
+        border: 1px solid $border;
+        background-color: $secondary;
+        text-transform: uppercase;
+        text-align: center;
+        padding: $padding;
+        h1 { font-family: $bold; }
+    }
+
+    // ***** footer *****
+    #footer.footer {
+        padding: $padding;
+        font-size: em(25);
+        text-align: center;
+        text-transform: uppercase;
+        background-color: rgba(36,41,46,.5);
+        p { color: $white; }
+        
+        // ----- social -----
+        .social {
+            margin-top: 20px;
+            a {
+                margin: 0 12.5px;
+                @include inline-block;
+                @include media(phone) { margin: 0 3.5px; }
+                &[href*="facebook"] { @include sprite(facebook, social, hover); }
+                &[href*="twitter"] { @include sprite(twitter, social, hover); }
+                &[href*="github"] { @include sprite(github, social, hover); }
+                &[href*="linkedin"] { @include sprite(linkedin, social, hover); }
+                &[href*="instagram"] { @include sprite(instagram, social, hover); }
+            }
+        }
+    }
+}
