@@ -1,0 +1,32 @@
+// global variables
+$browser-context: 16;
+$padding: 24px 0;
+$time: .1s;
+
+// colors
+$secondary: #FAFBFC;
+$primary: #24292E;
+$border: #E1E4E8;
+$white: #FFF;
+
+// media queries
+// $phone: 768px;
+// $tablet: 1024px;
+// $laptop: 1200px;
+// $desktop: 1440px;
+// $container: 100%;
+
+// font
+$bold: 'rubik bold';
+$light: 'rubik light';
+$regular: 'rubik regular';
+
+// media queries
+$phonePortrait:   '(max-width: 414px)';
+$phoneLandscape:  '(min-width: 415px) and (max-width: 667px)';
+$tabletPortrait:  '(min-width: 668px) and (max-width: 768px)';
+$tabletLandscape: '(min-width: 769px) and (max-width: 1024px)';
+$desktop:         '(min-width: 1025px) and (max-width: 1366px)';
+$desktopWide:     '(min-width: 1367px) and (max-width: 1680px)';
+$desktopHD:       '(min-width: 1681px) and (max-width: 1920px)';
+$desktopMega:     '(min-width: 1921px)';

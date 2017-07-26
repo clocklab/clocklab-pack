@@ -1,0 +1,22 @@
+@function pxMedia($px, $media) {
+    $k: 0;
+    @if $media == phonePortrait {
+        $k: .15625;
+    } @else if $media == phoneLandscape {
+        $k: .12048;  //.08803;
+    } @else if $media == tabletPortrait {
+        $k: .07485;  //.065106;
+    } @else if $media == tabletLandscape {
+        $k: .065012; //.041
+    } @else if $media == desktop {
+        $k: .04878;  //.04687513;
+    } @else if $media == desktopWide {
+        $k: .036576; //.04394543;
+    } @else if $media == desktopHD {
+        $k: .029744; //.0390626;
+    } @else if $media == desktopMega {
+        $k: .026028; //.0341797;
+    }
+
+    @return $px * $k * 1vw;
+}
